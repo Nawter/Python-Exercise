@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>24 Draw A Game Board</title>
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=0.8">
+	<meta name="author" content="Michele Pratusevich, michele.pratusevich@gmail.com">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="shortcut icon" type="image/png" href="/favicon.png">
+
+	
+</head>
+<body>
+<noscript id="deferred-styles">
+	<link rel="stylesheet" type="text/css" href="/css/syntax.css">
+</noscript>
+
+<div class="header center">
+	<div class="logodiv">
+		<img class="logo" src="/assets/img/logo.png">
+	</div>
+	<div class="header-text">
+		<div>
+			<div class="header-left">
+				<h1>Practice Python</h1>
+			<!-- 	<span id="gratipay" class="alwaysright leftmargin"><script data-gratipay-username="mprat"
+			        data-gratipay-widget="button"
+			        src="//grtp.co/v1.js"></script></span> -->
+			</div>
+	        <div class="header-right">
+	        	<ul>
+				    <li>
+				    	<a href="http://cloud.feedly.com/#subscription%2Ffeed%2Fhttps%3A%2F%2Fpracticepython.org%2Fatom.xml" target="blank"><img id="feedlyFollow" class="alwaysright leftmargin" src="https://s3.feedly.com/img/follows/feedly-follow-rectangle-volume-medium_2x.png" alt="follow us in feedly" width="71" height="25"></a>
+				    </li>
+					<li>
+						<a href="https://practicepython.org/atom.xml" target="_blank"><img class="logo-small-height alwaysright" src="/assets/img/rss_img.png" alt="Atom feed XML"></a>
+					</li>
+					<li>
+						<a href="https://www.buymeacoffee.com/practicepython" target="_blank"><img class="logo-small-height alwaysright" src="/assets/img/bmac-yellow-button.png"></a>
+					</li>
+				</ul>
+				<div class="twitter-icon">
+					<a href="https://twitter.com/practice_python" class="twitter-follow-button" data-show-count="false">Follow @practice_python</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+				</div>
+			</div>
+		</div>
+		<div>
+			<h2>Beginner Python exercises</h2>
+		</div>
+	</div>
+</div>
+<div class="header center">
+	<ul>
+		<li><a href="/">Home</a></li>
+		<li><a href="/why-practice-python">Why Practice Python?</a></li>
+		<li><a href="/chilis/">Why Chilis?</a></li>
+		<li><a href="/resources-for-learners/">Resources for learners</a></li>
+		<li><a href="/exercises/">Exercises</a></li>
+		<li><a href="/blog/">Blog</a></li>
+		<li><a href="/about/">About</a></li>
+	</ul>
+</div>
+
+
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44633314-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+<script>
+  var loadDeferredStyles = function() {
+    var addStylesNode = document.getElementById("deferred-styles");
+    var replacement = document.createElement("div");
+    replacement.innerHTML = addStylesNode.textContent;
+    document.body.appendChild(replacement)
+    addStylesNode.parentElement.removeChild(addStylesNode);
+  };
+  var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+      webkitRequestAnimationFrame || msRequestAnimationFrame;
+  if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+  else window.addEventListener('load', loadDeferredStyles);
+</script>
+
+<div class="boxframe center">	
+	
+		<h4 class="textright">27 December 2014</h4>
+	
+
+	
+	<span><h1 class="pagetitle"> Draw A Game Board <img class="chili" src="/assets/img/chili-liz-20x20.png"> <img class="chili" src="/assets/img/chili-liz-20x20.png">  </h1>
+
+
+
+	<div>
+	<i>
+	
+	</i>
+	</div>
+
+
+
+	
+
+
+<h2>Exercise 24 (and <a href="/solution/2015/11/01/24-draw-a-game-board-solutions.html">Solution</a>)</h2>
+
+
+
+	
+
+
+<p>
+<i>This exercise is Part 1 of 4 of the Tic Tac Toe exercise series. The other exercises are: <a href="/exercise/2015/11/16/26-check-tic-tac-toe.html">Part 2</a>, <a href="/exercise/2015/11/26/27-tic-tac-toe-draw.html">Part 3</a>, and <a href="/exercise/2016/08/03/29-tic-tac-toe-game.html">Part 4</a>.</i>
+</p> 
+
+
+<p>Time for some fake graphics! Let’s say we want to draw game boards that look like this:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python"> <span class="o">---</span> <span class="o">---</span> <span class="o">---</span> 
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span> 
+ <span class="o">---</span> <span class="o">---</span> <span class="o">---</span>  
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span> 
+ <span class="o">---</span> <span class="o">---</span> <span class="o">---</span>  
+<span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span> 
+ <span class="o">---</span> <span class="o">---</span> <span class="o">---</span> </code></pre></figure>
+
+<p>This one is 3x3 (like in tic tac toe). Obviously, they come in many other sizes (8x8 for chess, 19x19 for Go, and many more).</p>
+
+<p>Ask the user what size game board they want to draw, and draw it for them to the screen using Python’s <code class="language-plaintext highlighter-rouge">print</code> statement.</p>
+
+<p>Remember that in Python 3, printing to the screen is accomplished by</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">  <span class="k">print</span><span class="p">(</span><span class="s">"Thing to show on screen"</span><span class="p">)</span></code></pre></figure>
+
+<p><em>Hint: this requires some use of functions, as were discussed <a href="/exercise/2014/04/16/11-check-primality-functions.html">previously on this blog</a> and <a href="http://www.tutorialspoint.com/python/python_functions.htm">elsewhere on the Internet, like this TutorialsPoint link</a>.</em></p>
+
+<h2 id="topics-and-links-for-more-information">Topics and links for more information</h2>
+
+<p>The main topic of this exercise is functions. They are tricky, and deserve lots of practice and thought. Here are a few links in case you want some more reading.</p>
+
+<ol>
+  <li><a href="http://www.tutorialspoint.com/python/python_functions.htm">Functions on TutorialsPoint</a></li>
+  <li><a href="http://anh.cs.luc.edu/python/hands-on/3.1/handsonHtml/functions.html">Hands-on Python, by Loyola University</a></li>
+  <li><a href="http://learnpythonthehardway.org/book/ex21.html">Learn Python the Hard Way</a></li>
+  <li><a href="http://zetcode.com/lang/python/functions/">ZetCode</a></li>
+</ol>
+
+<p>There are hundreds more out there - read and practice away!</p>
+
+
+
+	<h2>Happy coding!</h2>
+
+
+<h2>Enjoying Practice Python?</h2>
+
+<div class="share">
+    <h3>Buy me a coffee  </h3>
+    <a href="https://www.buymeacoffee.com/practicepython" target="_blank"><img class="logo-small-height" src="/assets/img/bmac-yellow-button.png"></a>
+</div>
+
+<div class="share">
+    <h3>Share the fun!</h3>
+    <ul>
+        <li class="reddit">
+            <a href="http://www.reddit.com/submit?url=https://www.practicepython.org/exercise/2014/12/27/24-draw-a-game-board.html&amp;title=24%20Draw%20A%20Game%20Board" target="_blank">
+                <svg width="1792" height="1792" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path fill="#ff4500" d="M1067 1129q13 13 0 26-53 53-171 53t-171-53q-13-13 0-26 5-6 13-6t13 6q42 42 145 42t145-42q5-6 13-6t13 6zm-263-156q0 31-23 54t-54 23-54-23-23-54q0-32 22.5-54.5t54.5-22.5 54.5 22.5 22.5 54.5zm338 0q0 31-23 54t-54 23-54-23-23-54q0-32 22.5-54.5t54.5-22.5 54.5 22.5 22.5 54.5zm215-103q0-42-30-72t-73-30q-42 0-73 31-113-78-267-82l54-243 171 39q1 32 23.5 54t53.5 22q32 0 54.5-22.5t22.5-54.5-22.5-54.5-54.5-22.5q-48 0-69 43l-189-42q-17-5-21 13l-60 268q-154 6-265 83-30-32-74-32-43 0-73 30t-30 72q0 30 16 55t42 38q-5 25-5 48 0 122 120 208.5t289 86.5q170 0 290-86.5t120-208.5q0-25-6-49 25-13 40.5-37.5t15.5-54.5zm307-454v960q0 119-84.5 203.5t-203.5 84.5h-960q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960q119 0 203.5 84.5t84.5 203.5z"></path></svg>
+            </a>
+        </li>
+        <li class="twitter">
+            <a href="https://twitter.com/intent/tweet?via=practice_python&amp;url=https://www.practicepython.org/exercise/2014/12/27/24-draw-a-game-board.html&amp;text=24%20Draw%20A%20Game%20Board" target="_blank">
+                <svg width="1792" height="1792" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path fill="#1da1f2" d="M1408 610q-56 25-121 34 68-40 93-117-65 38-134 51-61-66-153-66-87 0-148.5 61.5t-61.5 148.5q0 29 5 48-129-7-242-65t-192-155q-29 50-29 106 0 114 91 175-47-1-100-26v2q0 75 50 133.5t123 72.5q-29 8-51 8-13 0-39-4 21 63 74.5 104t121.5 42q-116 90-261 90-26 0-50-3 148 94 322 94 112 0 210-35.5t168-95 120.5-137 75-162 24.5-168.5q0-18-1-27 63-45 105-109zm256-194v960q0 119-84.5 203.5t-203.5 84.5h-960q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960q119 0 203.5 84.5t84.5 203.5z"></path></svg>
+            </a>
+        </li>
+        <li class="facebook">
+            <a href="http://www.facebook.com/sharer.php?u=https://www.practicepython.org/exercise/2014/12/27/24-draw-a-game-board.html&amp;t=24%20Draw%20A%20Game%20Board" target="_blank">
+                <svg width="1792" height="1792" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path fill="#3b5998" d="M1376 128q119 0 203.5 84.5t84.5 203.5v960q0 119-84.5 203.5t-203.5 84.5h-188v-595h199l30-232h-229v-148q0-56 23.5-84t91.5-28l122-1v-207q-63-9-178-9-136 0-217.5 80t-81.5 226v171h-200v232h200v595h-532q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960z"></path></svg>
+            </a>
+        </li>
+        <li class="hn">
+            <a href="http://news.ycombinator.com/submitlink?u=https://www.practicepython.org/exercise/2014/12/27/24-draw-a-game-board.html&amp;t=24%20Draw%20A%20Game%20Board" target="_blank">
+                <svg width="1792" height="1792" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path fill="#ff6600" d="M937 1004l266-499h-112l-157 312q-24 48-44 92l-42-92-155-312h-120l263 493v324h101v-318zm727-588v960q0 119-84.5 203.5t-203.5 84.5h-960q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960q119 0 203.5 84.5t84.5 203.5z"></path></svg>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+
+	
+
+
+
+
+
+<div class="next-page-links">
+
+	<a class="prev-link" href="/exercise/2014/12/14/23-file-overlap.html">« Previous exercise</a>
+
+
+
+	<a class="next-link" href="/exercise/2015/11/01/25-guessing-game-two.html">Next exercise »</a>
+
+</div>
+
+
+<br>
+<div id="treehouse-fullsize">
+<a target="new" href="//treehouse.7eer.net/c/348966/230400/3944"><img src="//a.impactradius-go.com/display-ad/3944-230400" border="0" alt="" width="728" height="90"></a><img height="0" width="0" src="//treehouse.7eer.net/i/348966/230400/3944" style="position:absolute;visibility:hidden;" border="0">
+</div>
+<div id="treehouse-mobile">
+<a target="new" href="//treehouse.7eer.net/c/348966/234096/3944"><img src="//a.impactradius-go.com/display-ad/3944-234096" border="0" alt="" width="300" height="250"></a><img height="0" width="0" src="//treehouse.7eer.net/i/348966/234096/3944" style="position:absolute;visibility:hidden;" border="0">
+</div>
+
+
+
+	<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'practicepython'; 
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</span>
+</div>
+
+<div class="footer center">
+
+
+<div><i>Copyright Michele Pratusevich, 2014-2022.</i></div>
+<div><a href="/disclosure.html"><i>Advertising disclosure</i></a></div>
+
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- responsive-practicepython -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6567168629713427" data-ad-slot="4170472597" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+</body>
+</html>

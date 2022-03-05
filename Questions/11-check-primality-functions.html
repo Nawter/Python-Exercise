@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>11 Check Primality Functions</title>
+	<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=0.8">
+	<meta name="author" content="Michele Pratusevich, michele.pratusevich@gmail.com">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="/css/main.css">
+	<link rel="shortcut icon" type="image/png" href="/favicon.png">
+
+	
+</head>
+<body>
+<noscript id="deferred-styles">
+	<link rel="stylesheet" type="text/css" href="/css/syntax.css">
+</noscript>
+
+<div class="header center">
+	<div class="logodiv">
+		<img class="logo" src="/assets/img/logo.png">
+	</div>
+	<div class="header-text">
+		<div>
+			<div class="header-left">
+				<h1>Practice Python</h1>
+			<!-- 	<span id="gratipay" class="alwaysright leftmargin"><script data-gratipay-username="mprat"
+			        data-gratipay-widget="button"
+			        src="//grtp.co/v1.js"></script></span> -->
+			</div>
+	        <div class="header-right">
+	        	<ul>
+				    <li>
+				    	<a href="http://cloud.feedly.com/#subscription%2Ffeed%2Fhttps%3A%2F%2Fpracticepython.org%2Fatom.xml" target="blank"><img id="feedlyFollow" class="alwaysright leftmargin" src="https://s3.feedly.com/img/follows/feedly-follow-rectangle-volume-medium_2x.png" alt="follow us in feedly" width="71" height="25"></a>
+				    </li>
+					<li>
+						<a href="https://practicepython.org/atom.xml" target="_blank"><img class="logo-small-height alwaysright" src="/assets/img/rss_img.png" alt="Atom feed XML"></a>
+					</li>
+					<li>
+						<a href="https://www.buymeacoffee.com/practicepython" target="_blank"><img class="logo-small-height alwaysright" src="/assets/img/bmac-yellow-button.png"></a>
+					</li>
+				</ul>
+				<div class="twitter-icon">
+					<a href="https://twitter.com/practice_python" class="twitter-follow-button" data-show-count="false">Follow @practice_python</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+				</div>
+			</div>
+		</div>
+		<div>
+			<h2>Beginner Python exercises</h2>
+		</div>
+	</div>
+</div>
+<div class="header center">
+	<ul>
+		<li><a href="/">Home</a></li>
+		<li><a href="/why-practice-python">Why Practice Python?</a></li>
+		<li><a href="/chilis/">Why Chilis?</a></li>
+		<li><a href="/resources-for-learners/">Resources for learners</a></li>
+		<li><a href="/exercises/">Exercises</a></li>
+		<li><a href="/blog/">Blog</a></li>
+		<li><a href="/about/">About</a></li>
+	</ul>
+</div>
+
+
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-44633314-2', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+<script>
+  var loadDeferredStyles = function() {
+    var addStylesNode = document.getElementById("deferred-styles");
+    var replacement = document.createElement("div");
+    replacement.innerHTML = addStylesNode.textContent;
+    document.body.appendChild(replacement)
+    addStylesNode.parentElement.removeChild(addStylesNode);
+  };
+  var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+      webkitRequestAnimationFrame || msRequestAnimationFrame;
+  if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+  else window.addEventListener('load', loadDeferredStyles);
+</script>
+
+<div class="boxframe center">	
+	
+		<h4 class="textright">16 April 2014</h4>
+	
+
+	
+	<span><h1 class="pagetitle"> Check Primality Functions <img class="chili" src="/assets/img/chili-liz-20x20.png"> <img class="chili" src="/assets/img/chili-liz-20x20.png"> <img class="chili" src="/assets/img/chili-liz-20x20.png">  </h1>
+
+
+
+	<div>
+	<i>
+	
+	</i>
+	</div>
+
+
+
+	
+
+
+<h2>Exercise 11 (and <a href="/solution/2014/04/16/11-check-primality-functions-solutions.html">Solution</a>)</h2>
+
+
+
+
+<p>Ask the user for a number and determine whether the number is prime or not. (For those who have forgotten, a prime number is a number that has no divisors.). You can (and should!) use your answer to <a href="/exercise/2014/02/26/04-divisors.html">Exercise 4</a> to help you. Take this opportunity to practice using functions, described below.</p>
+
+<h2 id="discussion">Discussion</h2>
+
+<p>Concepts for this week:</p>
+
+<ul>
+  <li>Functions</li>
+  <li>Reusable functions</li>
+  <li>Default arguments</li>
+</ul>
+
+<h3 id="functions">Functions</h3>
+
+<p>One of the tools programming gives us is the ability to break down problems into easier (or perhaps previously solved) or reusable subproblems. It is good practice to have a function have a single purpose, and the name of that function should hint at it’s purpose in some way.</p>
+
+<p>Most programming languages have this idea of a function, subroutine, or subprogram. In Python, a function is a programming construct that allows exactly that.</p>
+
+<p>Let’s look at a simple example:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">  <span class="k">def</span> <span class="nf">get_integer</span><span class="p">():</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Give me a number: "</span><span class="p">))</span></code></pre></figure>
+
+<p>In this small example, we used the same code that asks a user for input as a tabbed line underneath this <code class="language-plaintext highlighter-rouge">def</code> statement. The <code class="language-plaintext highlighter-rouge">def</code> means that everything tabbed underneath is a function. The name <code class="language-plaintext highlighter-rouge">get_integer()</code> is just a name that I (the programmer) made up. If I just include this code inside a Python file and run it, nothing will happen - all I have done so far is wrapped my code inside of a function; I never told my program to actually RUN my function.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">  <span class="k">def</span> <span class="nf">get_integer</span><span class="p">():</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">"Give me a number: "</span><span class="p">))</span>
+
+  <span class="n">age</span> <span class="o">=</span> <span class="n">get_integer</span><span class="p">()</span>
+  <span class="n">school_year</span> <span class="o">=</span> <span class="n">get_integer</span><span class="p">()</span>
+  <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="mi">15</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"You are over the age of 15"</span><span class="p">)</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">"You are in grade "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">school_year</span><span class="p">))</span></code></pre></figure>
+
+<p>What I have done here is <em>called</em> the function (told it to run) by writing <code class="language-plaintext highlighter-rouge">age = get_integer()</code>. When this line of code runs, what happens is the program will <em>execute</em> (run) the function by asking me for a number, then <em>returning</em> it (giving it back to me) by saving it inside the variable <code class="language-plaintext highlighter-rouge">age</code>. Now when I want to ask the user for another number (this time representing the school year), I do the same thing with the variable <code class="language-plaintext highlighter-rouge">school_year</code>.</p>
+
+<h3 id="reusable-functions">Reusable functions</h3>
+
+<p>This is all well and good, but I can make my function do much more for me. Right now, my function will always ask the user for a number by printing the string <code class="language-plaintext highlighter-rouge">"Give me a number: "</code>. What if I want to print a different string every time I ask the user for a number, but otherwise use the same idea for the function? In other words, I want a variable parameter in my function that changes every time I call the function based on something I (the programmer) want to be different.</p>
+
+<p>I can do this by <em>passing</em> (giving) my function a variable. Like this:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">  <span class="k">def</span> <span class="nf">get_integer</span><span class="p">(</span><span class="n">help_text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="n">help_text</span><span class="p">))</span></code></pre></figure>
+
+<p>Now what I can do when I call the function is something like this:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">  <span class="k">def</span> <span class="nf">get_integer</span><span class="p">(</span><span class="n">help_text</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="n">help_text</span><span class="p">))</span>
+
+  <span class="n">age</span> <span class="o">=</span> <span class="n">get_integer</span><span class="p">(</span><span class="s">"Tell me your age: "</span><span class="p">)</span>
+  <span class="n">school_year</span> <span class="o">=</span> <span class="n">get_integer</span><span class="p">(</span><span class="s">"What grade are you in? "</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="mi">15</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"You are over the age of 15"</span><span class="p">)</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">"You are in grade "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">school_year</span><span class="p">))</span></code></pre></figure>
+
+<p>Now it is easier for a user to use the program, because the help text is different.</p>
+
+<p>These variables you pass to functions are called <em>variables</em>, <em>parameters</em>, or <em>arguments</em>.</p>
+
+<h3 id="default-arguments">Default arguments</h3>
+
+<p>In the example above, once I have added an <em>argument</em> to my function, I always have to give an argument when I call the function. I can’t forget to give the <code class="language-plaintext highlighter-rouge">get_integer()</code> function from above a string to print to the screen. In some cases, I want there to be a “default” behavior for my function that happens when I create an argument for it but don’t give it any.</p>
+
+<p>In the example above, if I don’t give a custom string (which may be 95% of the time I use this function), I just want the <code class="language-plaintext highlighter-rouge">input()</code> line to say <code class="language-plaintext highlighter-rouge">"Give me a number: "</code> and I want to save myself the trouble of writing this every single time I call the function. So what I can do is give my function <em>default arguments</em>. Like so:</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">  <span class="k">def</span> <span class="nf">get_integer</span><span class="p">(</span><span class="n">help_text</span><span class="o">=</span><span class="s">"Give me a number: "</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="n">help_text</span><span class="p">))</span></code></pre></figure>
+
+<p>What happens now is I can use the function in two ways: by giving it an argument and by NOT giving it an argument.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">  <span class="k">def</span> <span class="nf">get_integer</span><span class="p">(</span><span class="n">help_text</span><span class="o">=</span><span class="s">"Give me a number: "</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="n">help_text</span><span class="p">))</span>
+
+  <span class="n">age</span> <span class="o">=</span> <span class="n">get_integer</span><span class="p">(</span><span class="s">"Tell me your age: "</span><span class="p">)</span>
+  <span class="n">school_year</span> <span class="o">=</span> <span class="n">get_integer</span><span class="p">()</span>
+  <span class="k">if</span> <span class="n">age</span> <span class="o">&gt;</span> <span class="mi">15</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"You are over the age of 15"</span><span class="p">)</span>
+  <span class="k">print</span><span class="p">(</span><span class="s">"You are in grade "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">school_year</span><span class="p">))</span></code></pre></figure>
+
+<p>The first time I call the function, it will print <code class="language-plaintext highlighter-rouge">"Tell me your age: "</code>, but the second time, it will print <code class="language-plaintext highlighter-rouge">"Give me a number: "</code>, because I did not give it a string and it will execute the default behavior.</p>
+
+<h3 id="recap">Recap</h3>
+
+<p>What a function does is wrap a piece of code that we want to reuse, labels it, and allows us to use it again relatively easily. You can add variables to the functions to make your code even MORE reusable, and you can add default arguments to these variables.</p>
+
+<p>Functions are a bit strange to deal with at first, but once you master them, they will be your savior in programming. Besides, the whole point of learning programming is abstraction, problem solving, breaking down problems, and that’s exactly what functions are all about.</p>
+
+
+
+	<h2>Happy coding!</h2>
+
+
+<h2>Enjoying Practice Python?</h2>
+
+<div class="share">
+    <h3>Buy me a coffee  </h3>
+    <a href="https://www.buymeacoffee.com/practicepython" target="_blank"><img class="logo-small-height" src="/assets/img/bmac-yellow-button.png"></a>
+</div>
+
+<div class="share">
+    <h3>Share the fun!</h3>
+    <ul>
+        <li class="reddit">
+            <a href="http://www.reddit.com/submit?url=https://www.practicepython.org/exercise/2014/04/16/11-check-primality-functions.html&amp;title=11%20Check%20Primality%20Functions" target="_blank">
+                <svg width="1792" height="1792" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path fill="#ff4500" d="M1067 1129q13 13 0 26-53 53-171 53t-171-53q-13-13 0-26 5-6 13-6t13 6q42 42 145 42t145-42q5-6 13-6t13 6zm-263-156q0 31-23 54t-54 23-54-23-23-54q0-32 22.5-54.5t54.5-22.5 54.5 22.5 22.5 54.5zm338 0q0 31-23 54t-54 23-54-23-23-54q0-32 22.5-54.5t54.5-22.5 54.5 22.5 22.5 54.5zm215-103q0-42-30-72t-73-30q-42 0-73 31-113-78-267-82l54-243 171 39q1 32 23.5 54t53.5 22q32 0 54.5-22.5t22.5-54.5-22.5-54.5-54.5-22.5q-48 0-69 43l-189-42q-17-5-21 13l-60 268q-154 6-265 83-30-32-74-32-43 0-73 30t-30 72q0 30 16 55t42 38q-5 25-5 48 0 122 120 208.5t289 86.5q170 0 290-86.5t120-208.5q0-25-6-49 25-13 40.5-37.5t15.5-54.5zm307-454v960q0 119-84.5 203.5t-203.5 84.5h-960q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960q119 0 203.5 84.5t84.5 203.5z"></path></svg>
+            </a>
+        </li>
+        <li class="twitter">
+            <a href="https://twitter.com/intent/tweet?via=practice_python&amp;url=https://www.practicepython.org/exercise/2014/04/16/11-check-primality-functions.html&amp;text=11%20Check%20Primality%20Functions" target="_blank">
+                <svg width="1792" height="1792" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path fill="#1da1f2" d="M1408 610q-56 25-121 34 68-40 93-117-65 38-134 51-61-66-153-66-87 0-148.5 61.5t-61.5 148.5q0 29 5 48-129-7-242-65t-192-155q-29 50-29 106 0 114 91 175-47-1-100-26v2q0 75 50 133.5t123 72.5q-29 8-51 8-13 0-39-4 21 63 74.5 104t121.5 42q-116 90-261 90-26 0-50-3 148 94 322 94 112 0 210-35.5t168-95 120.5-137 75-162 24.5-168.5q0-18-1-27 63-45 105-109zm256-194v960q0 119-84.5 203.5t-203.5 84.5h-960q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960q119 0 203.5 84.5t84.5 203.5z"></path></svg>
+            </a>
+        </li>
+        <li class="facebook">
+            <a href="http://www.facebook.com/sharer.php?u=https://www.practicepython.org/exercise/2014/04/16/11-check-primality-functions.html&amp;t=11%20Check%20Primality%20Functions" target="_blank">
+                <svg width="1792" height="1792" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path fill="#3b5998" d="M1376 128q119 0 203.5 84.5t84.5 203.5v960q0 119-84.5 203.5t-203.5 84.5h-188v-595h199l30-232h-229v-148q0-56 23.5-84t91.5-28l122-1v-207q-63-9-178-9-136 0-217.5 80t-81.5 226v171h-200v232h200v595h-532q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960z"></path></svg>
+            </a>
+        </li>
+        <li class="hn">
+            <a href="http://news.ycombinator.com/submitlink?u=https://www.practicepython.org/exercise/2014/04/16/11-check-primality-functions.html&amp;t=11%20Check%20Primality%20Functions" target="_blank">
+                <svg width="1792" height="1792" viewbox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path fill="#ff6600" d="M937 1004l266-499h-112l-157 312q-24 48-44 92l-42-92-155-312h-120l263 493v324h101v-318zm727-588v960q0 119-84.5 203.5t-203.5 84.5h-960q-119 0-203.5-84.5t-84.5-203.5v-960q0-119 84.5-203.5t203.5-84.5h960q119 0 203.5 84.5t84.5 203.5z"></path></svg>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+
+	
+
+
+
+
+
+<div class="next-page-links">
+
+	<a class="prev-link" href="/exercise/2014/04/10/10-list-overlap-comprehensions.html">« Previous exercise</a>
+
+
+
+	<a class="next-link" href="/exercise/2014/04/25/12-list-ends.html">Next exercise »</a>
+
+</div>
+
+
+<br>
+<div id="treehouse-fullsize">
+<a target="new" href="//treehouse.7eer.net/c/348966/230400/3944"><img src="//a.impactradius-go.com/display-ad/3944-230400" border="0" alt="" width="728" height="90"></a><img height="0" width="0" src="//treehouse.7eer.net/i/348966/230400/3944" style="position:absolute;visibility:hidden;" border="0">
+</div>
+<div id="treehouse-mobile">
+<a target="new" href="//treehouse.7eer.net/c/348966/234096/3944"><img src="//a.impactradius-go.com/display-ad/3944-234096" border="0" alt="" width="300" height="250"></a><img height="0" width="0" src="//treehouse.7eer.net/i/348966/234096/3944" style="position:absolute;visibility:hidden;" border="0">
+</div>
+
+
+
+	<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'practicepython'; 
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</span>
+</div>
+
+<div class="footer center">
+
+
+<div><i>Copyright Michele Pratusevich, 2014-2022.</i></div>
+<div><a href="/disclosure.html"><i>Advertising disclosure</i></a></div>
+
+
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- responsive-practicepython -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6567168629713427" data-ad-slot="4170472597" data-ad-format="auto"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+
+
+</body>
+</html>
